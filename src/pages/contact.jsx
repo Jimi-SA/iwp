@@ -11,7 +11,7 @@ const Contact = () => {
           </h1>
           <span className='md:pl-5 text-sm md:text-lg'>Explore what we have prepared for you</span>
           </div>
-          <div className='bg-primary-xtra2 space-y-4 md:text-lg py-8 text-white md:p-10 p-4 rounded-lg text-sm md:rounded-2xl'>
+          <div className='bg-stone-700 space-y-4 md:text-lg py-8 text-white md:p-10 p-4 rounded-lg text-sm md:rounded-2xl'>
             <p className=''>
               Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quae sint, dolore minima nobis nemo quo blanditiis eligendi perspiciatis quisquam perferendis fugit sunt ea, a hic obcaecati, totam provident veritatis. Sapiente?
             </p>

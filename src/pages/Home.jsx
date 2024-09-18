@@ -178,7 +178,7 @@ const Home = () => {
       </section>
 
       {/* Contact Section */}
-      <section className="py-20 bg-stone-800 text-white">
+      <section className="py-20 lg:px-10 md:px-16 sm:px-5 bg-stone-800 text-white">
       <motion.h2
         className="text-4xl font-bold text-center mb-12 text-lime-300"
         initial={{ opacity: 0 }}
@@ -225,7 +225,7 @@ const Home = () => {
     </section>
 
       {/* Call to Action Section */}
-      <section className="py-20 bg-lime-50 text-center">
+      <section className="py-32 bg-lime-50 text-center">
         <motion.h2
           className="text-3xl font-bold mb-8 text-lime-700"
           initial={{ opacity: 0 }}

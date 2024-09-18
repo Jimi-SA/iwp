@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { FaFacebookF, FaTwitter, FaInstagram, FaPhoneAlt, FaEnvelope } from 'react-icons/fa';
+import { FaFacebookF, FaTwitter, FaInstagram, FaPhoneAlt, FaEnvelope, FaShoppingCart } from 'react-icons/fa';
 
 export const Header = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -74,24 +74,39 @@ export const Header = () => {
         </div>
 
         {/* Desktop Menu */}
-        <ul className="hidden md:flex gap-7 font-medium items-center">
-          {navItems.map((item, index) => (
-            <motion.li
-              key={index}
-              className={`relative ${location.pathname === item.to ? 'text-lime-700 border-b-2 border-lime-700' : 'text-gray-600'}`}
-              initial={{ opacity: 0, y: -10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.3, delay: index * 0.1 }}
-            >
-              <Link
-                to={item.to}
-                className="hover:text-lime-700 transition-colors duration-300"
+        <div className="flex items-center">
+          <ul className="hidden md:flex gap-7 font-medium items-center">
+            {navItems.map((item, index) => (
+              <motion.li
+                key={index}
+                className={`relative ${location.pathname === item.to ? 'text-lime-700 border-b-2 border-lime-700' : 'text-gray-600'}`}
+                initial={{ opacity: 0, y: -10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.3, delay: index * 0.1 }}
               >
-                {item.name}
-              </Link>
-            </motion.li>
-          ))}
-        </ul>
+                <Link
+                  to={item.to}
+                  className="hover:text-lime-700 transition-colors duration-300"
+                >
+                  {item.name}
+                </Link>
+              </motion.li>
+            ))}
+          </ul>
+
+          {/* Cart Icon */}
+          <div className="md:ml-6 flex ml-44 mt-1">
+            <Link to="/cart">
+              <motion.div
+                className="relative text-gray-600 hover:text-lime-700 transition-colors duration-300"
+                whileHover={{ scale: 1.2 }}
+              >
+                <FaShoppingCart size={24} />
+                <span className="absolute top-0 right-0 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">3</span>
+              </motion.div>
+            </Link>
+          </div>
+        </div>
 
         {/* Mobile Menu Toggle */}
         <div className="md:hidden mt-3">
