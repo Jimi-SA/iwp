@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { FaFacebookF, FaTwitter, FaInstagram, FaPhoneAlt, FaEnvelope, FaShoppingCart } from 'react-icons/fa';
 
@@ -34,7 +34,7 @@ export const Header = () => {
   return (
     <header className="bg-white w-full shadow-lg sticky top-0 z-50 md:relative">
       {/* Top Span for Contact Details */}
-      <div className="bg-lime-700 md:flex hidden lg:px-10 md:px-10 sm:px-5  text-white py-2 text-xs md:text-sm">
+      <div className="bg-lime-700 md:flex hidden lg:px-10 md:px-10 sm:px-5 text-white py-2 text-xs md:text-sm">
         <div className="container mx-auto flex justify-between items-center px-4">
           <span className="flex items-center gap-2">
             <FaPhoneAlt className="text-white" />
@@ -86,19 +86,19 @@ export const Header = () => {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.3, delay: index * 0.1 }}
               >
-                <Link
-                  to={item.to}
+                <a
+                  href={item.to}
                   className="hover:text-lime-700 transition-colors duration-300"
                 >
                   {item.name}
-                </Link>
+                </a>
               </motion.li>
             ))}
           </ul>
 
           {/* Cart Icon */}
           <div className="md:ml-6 flex ml-40 mt-1">
-            <Link to="/cart">
+            <a href="/cart">
               <motion.div
                 className="relative text-gray-600 hover:text-lime-700 transition-colors duration-300"
                 whileHover={{ scale: 1.2 }}
@@ -106,7 +106,7 @@ export const Header = () => {
                 <FaShoppingCart size={24} />
                 <span className="absolute top-0 right-0 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">3</span>
               </motion.div>
-            </Link>
+            </a>
           </div>
         </div>
 
@@ -166,12 +166,12 @@ export const Header = () => {
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.3, delay: index * 0.1 }}
                 >
-                  <Link
-                    to={item.to}
+                  <a
+                    href={item.to}
                     className="hover:text-lime-700 text-lg transition-colors duration-300"
                   >
                     {item.name}
-                  </Link>
+                  </a>
                 </motion.li>
               ))}
 
