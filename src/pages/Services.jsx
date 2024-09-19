@@ -1,23 +1,15 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
+import { servicesData } from '../data/services'; // Adjust the path accordingly
 
-// Dummy data for services
-const servicesData = [
-  {
-    id: 'waxing',
-    title: 'Waxing',
-    description: 'Experience smooth, hair-free skin with our waxing services.',
-    imgUrl: '/path-to-waxing-image',
-  },
-  {
-    id: 'facials',
-    title: 'Facials',
-    description: 'Rejuvenate your skin with our relaxing and refreshing facial treatments.',
-    imgUrl: '/path-to-facials-image',
-  },
-  // Add other services as needed
-];
+// Extract only the necessary fields
+const filteredServicesData = servicesData.map(category => ({
+  id: category.id,
+  title: category.title,
+  imgUrl: category.imgUrl || '', // Ensure imgUrl is correctly set if available
+  description: category.description,
+}));
 
 const Services = () => {
   const navigate = useNavigate();
@@ -40,9 +32,9 @@ const Services = () => {
 
         {/* Service Tiles */}
         <div className="mt-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
-          {servicesData.map((service, index) => (
+          {filteredServicesData.map((service, index) => (
             <motion.div
-              key={index}
+              key={service.id} // Use service.id as the key
               className="relative bg-white rounded-lg overflow-hidden shadow-xl transform hover:scale-105 transition-transform duration-500 cursor-pointer"
               whileHover={{ scale: 1.05 }}
               initial={{ opacity: 0, y: 50 }}
@@ -52,7 +44,7 @@ const Services = () => {
             >
               {/* Image */}
               <motion.img
-                src={service.imgUrl}
+                src={service.imgUrl} // Update to use actual imgUrl if available
                 alt={service.title}
                 className="w-full h-64 object-cover"
                 whileHover={{ scale: 1.1 }}

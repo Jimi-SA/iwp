@@ -1,37 +1,40 @@
-import React, { Suspense, lazy, useState } from 'react';
+import React, { useState, useEffect, Suspense, lazy } from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import { Header } from './components/Header';
 import { Footer } from './components/Footer';
+import Loader from './components/loader';
 import Fab from '@mui/material/Fab';
 import WhatsAppIcon from '@mui/icons-material/WhatsApp';
 import Snackbar from '@mui/material/Snackbar';
 import MuiAlert from '@mui/material/Alert';
 
-// Lazy load pages
-const Home = lazy(() => import('./pages/Home'));
-const AboutUs = lazy(() => import('./pages/AboutUs'));
-const Services = lazy(() => import('./pages/Services'));
-const ServiceDetail = lazy(() => import('./pages/ServiceDetail'));
+// Regular imports
+import Home from './pages/Home';
+import AboutUs from './pages/AboutUs';
+import Services from './pages/Services';
+import ServiceDetail from './pages/ServiceDetail';
+import Contact from './pages/contact';
+import BookAppointment from './components/BookAppointment';
+
+// Lazy load Book page only
 const Book = lazy(() => import('./pages/book'));
-const Contact = lazy(() => import('./pages/contact'));
+const Shop = lazy(() => import('./pages/Shop'));
 
 function App() {
-  const whatsappNumber = "123456789"; // Your WhatsApp number here
-  const whatsappMessage = "Hello, I would like to know more about your services!";
-  
-  // State for managing the toast message
+  const whatsappNumber = '123456789'; // Your WhatsApp number here
+  const whatsappMessage = 'Hello, I would like to know more about your services!';
+
+  // Snackbar state
   const [open, setOpen] = useState(false);
 
-  // Function to handle FAB click
+  // FAB click handler
   const handleFabClick = () => {
-    setOpen(true); // Show the message
+    setOpen(true); // Show message
     setTimeout(() => {
-      // Open WhatsApp after a 2-second delay
       window.open(`https://wa.me/${whatsappNumber}?text=${encodeURIComponent(whatsappMessage)}`, '_blank');
-    }, 2000); // 2-second delay
+    }, 2000); // Delay before opening WhatsApp
   };
 
-  // Function to close the Snackbar
   const handleClose = (event, reason) => {
     if (reason === 'clickaway') {
       return;
@@ -42,19 +45,35 @@ function App() {
   return (
     <Router>
       <Header />
-      <Suspense fallback={<div>Loading...</div>}>
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/about" element={<AboutUs />} />
-          <Route path="/services" element={<Services />} />
-          <Route path="/service/:serviceId" element={<ServiceDetail />} />
-          <Route path="/Book-now" element={<Book />} />
-          <Route path="/contact" element={<Contact />} />
-        </Routes>
-      </Suspense>
+      <Routes>
+        {/* Non-lazy loaded routes */}
+        <Route path="/" element={<Home />} />
+        <Route path="/about" element={<AboutUs />} />
+        <Route path="/services" element={<Services />} />
+        <Route path="/service/:serviceId" element={<ServiceDetail />} />
+        <Route path="/contact" element={<Contact />} />
+        <Route path="/book-appointment" component={BookAppointment} />
+        {/* Lazy load the Book component with fallback */}
+        <Route
+          path="/Book-now"
+          element={
+            <Suspense fallback={<Loader />}>
+              <Book />
+            </Suspense>
+          }
+        />
+         <Route
+          path="/Shop-here"
+          element={
+            <Suspense fallback={<Loader />}>
+              <Shop />
+            </Suspense>
+          }
+        />
+      </Routes>
       <Footer />
-      
-      {/* Floating Action Button for WhatsApp contact */}
+
+      {/* WhatsApp Floating Action Button */}
       <Fab
         onClick={handleFabClick}
         sx={{
@@ -71,7 +90,7 @@ function App() {
       >
         <WhatsAppIcon />
       </Fab>
-      
+
       {/* Snackbar for the message */}
       <Snackbar open={open} autoHideDuration={3000} onClose={handleClose}>
         <MuiAlert onClose={handleClose} severity="success" sx={{ width: '100%' }}>

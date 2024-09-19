@@ -30,13 +30,13 @@ const AboutUs = () => {
   return (
     <div className="bg-white text-gray-900">
       {/* Hero Section */}
-      <section className="relative bg-cover bg-center h-[60vh]" style={{ backgroundImage: 'url(/bg.jpg)' }}>
-        <div className="absolute inset-0 bg-black bg-opacity-50 flex justify-center items-center">
+      <section className="relative bg-cover bg-center h-[40vh] md:h-[60vh]" style={{ backgroundImage: 'url(/bg.jpg)' }}>
+        <div className="absolute inset-0 bg-black md:bg-opacity-50 bg-opacity-60 flex justify-center items-center">
           <motion.h1
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 1 }}
-            className="lg:text-6xl md:text-5xl sm-text-4xl text-3xl px-4 font-extrabold text-white"
+            className="lg:text-5xl md:text-5xl sm-text-4xl text-3xl px-4 font-extrabold text-white"
           >
             Welcome to Itohan Wellness Place
           </motion.h1>
@@ -53,7 +53,7 @@ const AboutUs = () => {
         >
           Our Story
         </motion.h2>
-        <p className="text-xl text-gray-700 leading-relaxed">
+        <p className="md:text-xl text-lg text-gray-700 leading-relaxed">
           Founded in 2015, **Itohan Wellness Place** began as a dream to create a serene space where individuals could
           escape the stresses of daily life and reconnect with their well-being. Inspired by the rich traditions of
           ancient healing and modern wellness practices, we have cultivated a sanctuary dedicated to relaxation,

@@ -13,6 +13,7 @@ export const Header = () => {
     { name: 'Services', to: '/services' },
     { name: 'Book Session', to: '/Book-now' },
     { name: 'Contact', to: '/contact' },
+    { name: 'Shop', to: '/Shop-here' },
   ];
 
   const contactDetails = {
@@ -31,9 +32,9 @@ export const Header = () => {
   }, [location.pathname]);
 
   return (
-    <header className="bg-white w-full shadow-lg">
+    <header className="bg-white w-full shadow-lg sticky top-0 z-50 md:relative">
       {/* Top Span for Contact Details */}
-      <div className="bg-lime-700 md:flex hidden lg:px-10 md:px-16 sm:px-5 text-white py-2 text-xs md:text-sm">
+      <div className="bg-lime-700 md:flex hidden lg:px-10 md:px-10 sm:px-5  text-white py-2 text-xs md:text-sm">
         <div className="container mx-auto flex justify-between items-center px-4">
           <span className="flex items-center gap-2">
             <FaPhoneAlt className="text-white" />
@@ -59,18 +60,19 @@ export const Header = () => {
         </div>
       </div>
 
-      <nav className="container  lg:px-10 md:px-16 sm:px-5 mx-auto flex items-center justify-between p-5 relative">
+      <nav className="container lg:px-10 md:px-12 mx-auto flex items-center justify-between p-5">
         {/* Logo */}
         <div>
           <a href="/">
-          <motion.img
-            src="/logo.png"
-            alt="Logo"
-            className="md:h-10 h-8 w-auto ml-2 transition-transform duration-300 hover:scale-105"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.5 }}
-          /></a>
+            <motion.img
+              src="/logo.png"
+              alt="Logo"
+              className="md:h-10 h-8 w-auto ml-2 transition-transform duration-300 hover:scale-105"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.5 }}
+            />
+          </a>
         </div>
 
         {/* Desktop Menu */}
@@ -172,6 +174,7 @@ export const Header = () => {
                   </Link>
                 </motion.li>
               ))}
+
               {/* Additional Mobile Contact Details */}
               <div className="text-center mt-6">
                 <p className="text-lg font-semibold mb-2">Contact Us:</p>

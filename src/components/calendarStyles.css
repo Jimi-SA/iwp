@@ -1,0 +1,30 @@
+/* calendarStyles.css */
+
+.react-calendar {
+    border: none;
+    background-color: #f9f9f9;
+    border-radius: 0.5rem;
+  }
+  
+  .react-calendar__tile {
+    border-radius: 0.5rem;
+  }
+  
+  .react-calendar__tile--active {
+    background: #4f46e5;
+    color: white;
+  }
+  
+  .react-calendar__tile--disabled {
+    color: #d1d5db;
+  }
+  
+  .react-calendar__navigation button {
+    background: #4f46e5;
+    color: white;
+  }
+  
+  .react-calendar__month-view__weekdays {
+    font-weight: 500;
+  }
+  

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 
 // Sample Data Arrays
 const features = [
@@ -21,71 +21,89 @@ const testimonials = [
 ];
 
 const Home = () => {
-  const images = ['/bg.jpg', '/bg2.jpg', '/bg3.jpg'];
-  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const slides = [
+    {
+      image: '/bg.jpg',
+      title: 'Welcome to Itohan Wellness Place',
+      description: 'Experience relaxation and rejuvenation like never before.',
+      buttonText: 'Book a Session',
+      buttonLink: '/book-now',
+    },
+    {
+      image: '/bg2.jpg',
+      title: 'Relax, Rejuvenate, Revitalize',
+      description: 'Discover our holistic therapies designed to heal your body and mind.',
+      buttonText: 'Learn More',
+      buttonLink: '/services',
+    },
+    {
+      image: '/bg3.jpg',
+      title: 'Your Wellness Journey Starts Here',
+      description: 'We offer personalized wellness experiences for a healthier, happier you.',
+      buttonText: 'Get Started',
+      buttonLink: '/contact',
+    },
+  ];
+
+  const [currentSlideIndex, setCurrentSlideIndex] = useState(0);
+
+  const getRandomDuration = () => Math.random() * 1 + 3; // Random duration between 5 and 7 seconds
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setCurrentImageIndex((prevIndex) =>
-        prevIndex === images.length - 1 ? 0 : prevIndex + 1
+      setCurrentSlideIndex((prevIndex) =>
+        prevIndex === slides.length - 1 ? 0 : prevIndex + 1
       );
-    }, 7000);
-
+    }, 30000);
     return () => clearInterval(interval);
-  }, [images.length]);
+  }, [slides.length]);
 
   return (
     <div>
       {/* Hero Section */}
-      <div
-        className="relative md:h-screen h-[80vh] bg-cover bg-center"
-        style={{ backgroundImage: `url(${images[currentImageIndex]})` }}
-      >
-        <div className="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center">
-          <motion.div
-            className="text-center text-white p-6 bg-opacity-75 rounded-lg"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 1 }}
-          >
-            <h1 className="text-4xl font-bold mb-4">Welcome to Itohan Wellness Place</h1>
-            <p className="text-lg mb-6">Experience relaxation and rejuvenation like never before.</p>
-            <a
-              href="/book-now"
-              className="bg-lime-700 text-white py-2 px-4 rounded-lg hover:bg-lime-800 transition duration-300"
-            >
-              Book a Session
-            </a>
-          </motion.div>
-        </div>
+      <div className="relative md:h-screen bg-black/50 h-[80vh] bg-cover bg-center">
+        {/* AnimatePresence with mode="wait" to handle exit transitions */}
+        <AnimatePresence mode="wait">
+          {slides.map((slide, index) =>
+            index === currentSlideIndex ? (
+              <motion.div
+                key={index}
+                className="absolute inset-0"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{
+                  opacity: { duration: getRandomDuration(), ease: 'easeInOut' },
+                }}
+                style={{
+                  backgroundImage: `url(${slide.image})`,
+                  backgroundSize: 'cover',
+                  backgroundPosition: 'center',
+                  backgroundRepeat: 'no-repeat',
+                }}
+              >
+                <div className="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center">
+                  <motion.div
+                    className="text-center text-white p-6 bg-opacity-75 rounded-lg"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ duration: 1 }}
+                  >
+                    <h1 className="text-4xl font-bold mb-4">{slide.title}</h1>
+                    <p className="text-lg mb-6">{slide.description}</p>
+                    <a
+                      href={slide.buttonLink}
+                      className="bg-lime-700 text-white py-2 px-4 rounded-lg hover:bg-lime-800 transition duration-300"
+                    >
+                      {slide.buttonText}
+                    </a>
+                  </motion.div>
+                </div>
+              </motion.div>
+            ) : null
+          )}
+        </AnimatePresence>
       </div>
-
-      {/* Features Section */}
-      <section className="py-20 bg-gray-100">
-        <motion.h2
-          className="text-3xl font-bold text-center mb-12 text-lime-700"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 1 }}
-        >
-          Why Choose Us?
-        </motion.h2>
-        <div className="flex flex-wrap justify-center gap-12">
-          {features.map((feature, index) => (
-            <motion.div
-              key={index}
-              className="bg-white p-6 rounded-lg shadow-lg text-center w-64"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: index * 0.2 }}
-            >
-              <img src={feature.icon} alt={feature.title} className="mx-auto mb-4 w-16 h-16" />
-              <h3 className="text-xl font-semibold mb-2">{feature.title}</h3>
-              <p className="text-gray-600">{feature.description}</p>
-            </motion.div>
-          ))}
-        </div>
-      </section>
 
       {/* Our Services Section */}
       <section className="py-20 lg:mx-10 md:px-16 sm:px-5 p-4 bg-white">
@@ -155,21 +173,21 @@ const Home = () => {
           <motion.img
             src="/bg2.jpg"
             alt="Gallery Image 1"
-            className="w-full h-60 object-cover rounded-lg"
+            className="w-full h-60 object-cover rounded-sm"
             whileHover={{ scale: 1.05 }}
             transition={{ duration: 0.3 }}
           />
           <motion.img
             src="/bg3.jpg"
             alt="Gallery Image 2"
-            className="w-full h-60 object-cover rounded-lg"
+            className="w-full h-60 object-cover rounded-sm"
             whileHover={{ scale: 1.05 }}
             transition={{ duration: 0.3 }}
           />
           <motion.img
             src="/bg2.jpg"
             alt="Gallery Image 3"
-            className="w-full h-60 object-cover rounded-lg"
+            className="w-full h-60 object-cover rounded-sm"
             whileHover={{ scale: 1.05 }}
             transition={{ duration: 0.3 }}
           />

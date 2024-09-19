@@ -1,0 +1,86 @@
+.loader-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: linear-gradient(135deg, #a7f3d0, #65a30d); /* Lime-700 stylish gradient */
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 9999;
+    overflow: hidden; /* Prevent scrolling */
+  }
+  
+  .logo-container {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    animation: fadeIn 1s ease-in-out forwards;
+  }
+  
+  .logo {
+    width: 70px;
+    height: 70px;
+    animation: pulse 2s infinite ease-in-out;
+  }
+  
+  .loading-circle {
+    position: absolute;
+    width: 140px;
+    height: 140px;
+    border: 5px solid rgba(0, 255, 0, 0.1); /* Light green border */
+    border-top: 5px solid #65a30d; /* Lime-700 green */
+    border-radius: 50%;
+  }
+  
+  @media (max-width: 600px) {
+    .logo {
+      width: 50px;
+      height: 50px;
+    }
+  
+    .loading-circle {
+      width: 100px;
+      height: 100px;
+    }
+  }
+  
+  @keyframes pulse {
+    0%, 100% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(1.1);
+    }
+  }
+  
+  /* Add smooth transition fade-in effect for the loader */
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+  
+  /* Background gradient animation */
+  @keyframes gradientShift {
+    0% {
+      background: linear-gradient(135deg, #eefaf5, #f4fcea);
+    }
+    50% {
+      background: linear-gradient(135deg, #eef9f4, #f0f9e4); /* Darker blend */
+    }
+    100% {
+      background: linear-gradient(135deg, #f0fef7, #f8fcf4);
+    }
+  }
+  
+  .loader-container {
+    animation: gradientShift 5s ease-in-out infinite; /* Animate the gradient background */
+  }
+  
