@@ -38,7 +38,7 @@ const Home = () => {
     <div>
       {/* Hero Section */}
       <div
-        className="relative h-screen bg-cover bg-center"
+        className="relative md:h-screen h-[80vh] bg-cover bg-center"
         style={{ backgroundImage: `url(${images[currentImageIndex]})` }}
       >
         <div className="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center">

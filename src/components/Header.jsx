@@ -33,7 +33,7 @@ export const Header = () => {
   return (
     <header className="bg-white w-full shadow-lg">
       {/* Top Span for Contact Details */}
-      <div className="bg-lime-700 lg:px-10 md:px-16 sm:px-5 text-white py-2 text-xs md:text-sm">
+      <div className="bg-lime-700 md:flex hidden lg:px-10 md:px-16 sm:px-5 text-white py-2 text-xs md:text-sm">
         <div className="container mx-auto flex justify-between items-center px-4">
           <span className="flex items-center gap-2">
             <FaPhoneAlt className="text-white" />
@@ -59,14 +59,14 @@ export const Header = () => {
         </div>
       </div>
 
-      <nav className="container lg:px-10 md:px-16 sm:px-5 mx-auto flex items-center justify-between p-5 relative">
+      <nav className="container  lg:px-10 md:px-16 sm:px-5 mx-auto flex items-center justify-between p-5 relative">
         {/* Logo */}
         <div>
           <a href="/">
           <motion.img
             src="/logo.png"
             alt="Logo"
-            className="h-10 w-auto ml-2 transition-transform duration-300 hover:scale-105"
+            className="md:h-10 h-8 w-auto ml-2 transition-transform duration-300 hover:scale-105"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.5 }}
@@ -95,7 +95,7 @@ export const Header = () => {
           </ul>
 
           {/* Cart Icon */}
-          <div className="md:ml-6 flex ml-44 mt-1">
+          <div className="md:ml-6 flex ml-40 mt-1">
             <Link to="/cart">
               <motion.div
                 className="relative text-gray-600 hover:text-lime-700 transition-colors duration-300"
@@ -155,7 +155,7 @@ export const Header = () => {
                 />
               </svg>
             </button>
-            <ul className="flex flex-col gap-6 mt-16 font-medium">
+            <ul className="flex flex-col text-center gap-6 mt-16 font-medium">
               {navItems.map((item, index) => (
                 <motion.li
                   key={index}
