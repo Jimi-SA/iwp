@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import './Loader.css';
+import './loader.css';
 
 const Loader = () => {
   return (
